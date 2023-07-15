@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PokemonMultipleSets(
     @SerializedName("data")
-    val dataList: List<Set>,
+    val dataList: List<PokemonSet>,
     val q: String?,
     val page: Int?,
     val pageSize: Int?,
@@ -12,11 +12,11 @@ data class PokemonMultipleSets(
     val select: String?
 )
 
-data class PokemonSet(
-    val data: Set
+data class SingleSet(
+    val data: PokemonSet
 )
 
-data class Set(
+data class PokemonSet(
     @SerializedName("id")
     val id: String,
     @SerializedName("name")
@@ -36,7 +36,7 @@ data class Set(
     @SerializedName("updatedAt")
     val updatedAt: String,
     @SerializedName("images")
-    val images: SetImages?
+    val images: SetImages
 )
 
 data class SetImages(

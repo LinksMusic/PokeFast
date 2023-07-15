@@ -42,7 +42,7 @@ data class Card(
     @SerializedName("convertedRetreatCost")
     val convertedRetreatCost: Int,
     @SerializedName("set")
-    val set: Set,
+    val set: PokemonSet,
     @SerializedName("number")
     val number: String,
     @SerializedName("artist")

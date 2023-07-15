@@ -1,0 +1,181 @@
+{
+  "name": "set_button_list_view",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "X4LE5eWSf8Nq3VIkuath8N",
+    "node": "1:18",
+    "version": "3823438490",
+    "component-id": "f2879cadf543cda8c4f76b01027ce6ae2dc8ea2e"
+  },
+  "default": "Set Button ListView",
+  "documentation": "Button of Set List Item",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "Button"
+      },
+      {
+        "type": "image",
+        "id": "Setname"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 19"
+      },
+      {
+        "type": "image",
+        "id": "Setlogo"
+      }
+    ],
+    "modes": {
+      "Set Button ListView": {
+        "rules": [
+          {
+            "id": "top_level",
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "0.0",
+              "offset-y": "4.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "is-structured": "false",
+            "children": [
+              "Button",
+              "Setname",
+              "Rectangle 19",
+              "Setlogo"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Button",
+            "border-radius": "100.0",
+            "tap-handler": "$Setbuttonclick",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "button.svg"
+          },
+          {
+            "id": "Setname",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "59.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "5.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "187.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "35.0"
+              }
+            },
+            "image-content": "$Setname",
+            "scale": "cover"
+          },
+          {
+            "id": "Rectangle 19",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "46.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "44.0"
+              }
+            },
+            "vector-content": "rectangle_19.svg"
+          },
+          {
+            "id": "Setlogo",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "7.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "6.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "32.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "32.0"
+              }
+            },
+            "image-content": "$Setlogo",
+            "scale": "cover"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Setbuttonclick": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": "When clicked open the Set to the card screen"
+    },
+    "Setname": {
+      "data-type": "image",
+      "required": false,
+      "description": "image of name of the set"
+    },
+    "Setlogo": {
+      "data-type": "image",
+      "required": false,
+      "description": "Logo of the set"
+    }
+  },
+  "previews": [
+    {
+      "design": "Set Button ListView",
+      "size": {
+        "width": 263.0,
+        "height": 44.0
+      },
+      "parameters": {
+        "Setname": "setname.png",
+        "Setlogo": "setlogo.png"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

@@ -1,6 +1,8 @@
 package com.example.pokefastapp.models
 
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
@@ -12,57 +14,50 @@ import kotlin.concurrent.thread
 class ApiClient {
     //API Key: 4e64dce7-86e2-4d88-b4f9-6ca84e4179e2
     /**
-     * Führt GET Anfrage aus und empfängt eine Nachricht im JSON Format
-     * @param type Welche GET Anfrage soll ausgeführt werden
-     * @param message Welches Set/Karte soll gesucht werden. Leere Message für alle
+     * Sends a GET request and receives a message in JSON format
+     * @param type Which GET request to execute
+     * @param message Which set/card to search for. Empty message for all
+     * @return The parsed response object based on the type of request
      */
-    fun sendGet(type: String, message: String = "") {
-        thread {
-            val url: URL
-            when (type) {
-                "getSet" -> url = URL("https://api.pokemontcg.io/v2/sets/$message")
-                "getCard" -> url = URL("https://api.pokemontcg.io/v2/cards/$message")
-                else -> {
-                    url = URL("")
-                    throw IllegalArgumentException("Invalid data type: $type")
-                }
-            }
-            with(url.openConnection() as HttpURLConnection) {
-                requestMethod = "GET"  // optional default is GET
-                setRequestProperty("X-Api-Key", "4e64dce7-86e2-4d88-b4f9-6ca84e4179e2")
-
-                InputStreamReader(inputStream).use { reader ->
-                    val json = reader.readText()
-                    if (type.startsWith("getSet")) {
-                        if (message.equals("")){
-                            val setResponse = parseMultipleSetsJson(json)
-                            println("Received set objects:")
-                            for (item in setResponse.dataList) {
-                                println(item.id)
-                            }
+    suspend fun sendGet(type: String, message: String = ""): Any? {
+        return withContext(Dispatchers.IO) {
+            return@withContext when (type) {
+                "getSet" -> {
+                    val url = URL("https://api.pokemontcg.io/v2/sets/$message")
+                    sendRequest(url) { json ->
+                        if (message.isBlank()) {
+                            parseMultipleSetsJson(json)
+                        } else {
+                            parseSetJson(json)
                         }
-                        else{
-                            val setResponse = parseSetJson(json)
-                            println("Received set object:")
-                            println(setResponse.data.id)
-                        }
-
-                    } else if (type.startsWith("getCard")) {
-                        val cardResponse = parseCardJson(json)
-                        println("Received card object:")
-                        println(cardResponse.data.id)
-                    } else {
-                        throw IllegalArgumentException("Invalid data type: $type")
                     }
                 }
+                "getCard" -> {
+                    val url = URL("https://api.pokemontcg.io/v2/cards/$message")
+                    sendRequest(url) { json ->
+                        parseCardJson(json)
+                    }
+                }
+                else -> throw IllegalArgumentException("Invalid data type: $type")
             }
         }
     }
 
+    private inline fun <reified T> sendRequest(url: URL, parseJson: (String) -> T): T {
+        val connection = url.openConnection() as HttpURLConnection
+        connection.requestMethod = "GET"
+        connection.setRequestProperty("X-Api-Key", "4e64dce7-86e2-4d88-b4f9-6ca84e4179e2")
 
-    fun parseSetJson(json: String): PokemonSet {
+        InputStreamReader(connection.inputStream).use { reader ->
+            val json = reader.readText()
+            return parseJson(json)
+        }
+    }
+
+
+    fun parseSetJson(json: String): SingleSet {
         val gson = Gson()
-        return gson.fromJson(json, PokemonSet::class.java)
+        return gson.fromJson(json, SingleSet::class.java)
     }
 
     fun parseMultipleSetsJson(json: String): PokemonMultipleSets {

@@ -1,11 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.relay'
 }
 
 android {
     namespace 'com.example.pokefastapp'
     compileSdk 33
+
+    sourceSets {
+        main {
+            assets {
+                srcDir('src/main/ui-packages')
+            }
+        }
+    }
 
     defaultConfig {
         applicationId "com.example.pokefastapp"
@@ -48,6 +57,7 @@ android {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'io.coil-kt:coil-compose:2.4.0'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')

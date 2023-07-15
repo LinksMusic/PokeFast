@@ -1,0 +1,196 @@
+{
+  "name": "set_button_grid_view",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "X4LE5eWSf8Nq3VIkuath8N",
+    "node": "3:182",
+    "version": "3823797088",
+    "component-id": "08ec492b5d70d3947343a0c0630561260967d60d"
+  },
+  "default": "Set Button GridView",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Visual"
+      },
+      {
+        "type": "text",
+        "id": "SetNameLabel"
+      },
+      {
+        "type": "vector",
+        "id": "Background"
+      },
+      {
+        "type": "image",
+        "id": "SetLogo"
+      }
+    ],
+    "modes": {
+      "Set Button GridView": {
+        "rules": [
+          {
+            "id": "top_level",
+            "tap-handler": "$on Button tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "main-axis-align": "start",
+            "cross-axis-align": "start",
+            "children": [
+              "Visual",
+              "SetNameLabel"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Visual",
+            "padding": "$Visual padding",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Background",
+              "SetLogo"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "SetNameLabel",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$SetNameLabel",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "11.0",
+            "line-height": "1.2102272727272727",
+            "typeface": "Inter"
+          },
+          {
+            "id": "Background",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": "0.0"
+              },
+              "vertical": {
+                "attachment": "center",
+                "offset": "0.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              }
+            },
+            "vector-content": "background.svg"
+          },
+          {
+            "id": "SetLogo",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": "0.0"
+              },
+              "vertical": {
+                "attachment": "center",
+                "offset": "0.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "86.0"
+              }
+            },
+            "image-content": "$Setlogo",
+            "scale": "cover"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Button tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "Visual padding": {
+      "data-type": "edge-data",
+      "required": false,
+      "description": ""
+    },
+    "SetNameLabel": {
+      "data-type": "text",
+      "required": false,
+      "description": "Name of Set"
+    },
+    "Setlogo": {
+      "data-type": "image",
+      "required": false,
+      "description": "Logo of Set"
+    }
+  },
+  "previews": [
+    {
+      "design": "Set Button GridView",
+      "size": {
+        "width": 86.0,
+        "height": 142.0
+      },
+      "parameters": {
+        "SetNameLabel": "Sword & Shield",
+        "Setlogo": "set_logo.png"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
