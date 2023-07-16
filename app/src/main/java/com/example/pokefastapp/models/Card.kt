@@ -2,11 +2,16 @@ package com.example.pokefastapp.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PokemonCard(
-    val data: Card
+
+data class PokemonMultipleCards(
+    @SerializedName("data")
+    val dataList: List<PokemonCard>
+)
+data class SingleCard(
+    val data: PokemonCard
 )
 
-data class Card(
+data class PokemonCard(
     @SerializedName("id")
     val id: String,
     @SerializedName("name")

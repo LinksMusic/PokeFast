@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "X4LE5eWSf8Nq3VIkuath8N",
     "node": "1:18",
-    "version": "3827480140",
+    "version": "3827929024",
     "component-id": "f2879cadf543cda8c4f76b01027ce6ae2dc8ea2e"
   },
   "default": "Set Button ListView",
@@ -136,7 +136,7 @@
               "saturation": "0.0",
               "value": "1.0"
             },
-            "text-content": "Name",
+            "text-content": "$SetNameLabel",
             "overflow": "visible",
             "text-align-vertical": "center",
             "text-size": "11.0",
@@ -193,6 +193,11 @@
       "data-type": "image",
       "required": false,
       "description": "Logo of the set"
+    },
+    "SetNameLabel": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
     }
   },
   "previews": [
@@ -204,7 +209,8 @@
       },
       "parameters": {
         "SetName": "setname.png",
-        "SetLogo": "setlogo.png"
+        "SetLogo": "setlogo.png",
+        "SetNameLabel": "Name"
       }
     }
   ],

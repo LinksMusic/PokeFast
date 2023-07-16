@@ -1,22 +1,29 @@
 package com.example.pokefastapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.ActivityResultRegistryOwner
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -25,19 +32,28 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.pokefastapp.models.ApiClient
+import com.example.pokefastapp.models.PokemonCard
+import com.example.pokefastapp.models.PokemonMultipleCards
 import com.example.pokefastapp.models.PokemonMultipleSets
 import com.example.pokefastapp.models.PokemonSet
 import com.example.pokefastapp.setbuttongridview.SetButtonGridView
 import com.example.pokefastapp.setbuttonlistview.SetButtonListView
 import kotlinx.coroutines.runBlocking
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), ActivityResultRegistryOwner {
+    private lateinit var cardsActivityResultLauncher: ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
+
+        cardsActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            }
+
 
         runBlocking{
             listView()
         }
+
 
         //setContentView(R.layout.activity_main)
     }
@@ -49,29 +65,37 @@ class MainActivity : ComponentActivity() {
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     item {
-                        Column(
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)
+                                .fillMaxHeight(),
+                            contentAlignment = Alignment.Center
                         ) {
-                            setDataList.forEachIndexed { index, setData ->
-                                Row(modifier = Modifier.fillMaxWidth()) {
-                                    SetButtonListView(
-                                        setLogo = rememberAsyncImagePainter(setData.images.symbol),
-                                        setName = rememberAsyncImagePainter(setData.images.logo),
-                                        onButtonTapped = {
-                                            Toast.makeText(
-                                                applicationContext,
-                                                "Hello World!",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                        }
-                                    )
-                                }
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .wrapContentHeight()
+                                    .align(Alignment.Center)
+                                    .fillMaxWidth()
+                            ) {
+                                setDataList.forEachIndexed { index, setData ->
+                                    Row(modifier = Modifier.fillMaxWidth()) {
+                                        SetButtonListView(
+                                            setLogo = rememberAsyncImagePainter(setData.images.symbol),
+                                            setName = rememberAsyncImagePainter(setData.images.logo),
+                                            setNameLabel = setData.name,
+                                            onButtonTapped = {
+                                                val intent = Intent(applicationContext, CardsActivity::class.java)
+                                                intent.putExtra("set_id", setData.id)
+                                                cardsActivityResultLauncher.launch(intent)
+                                            }
+                                        )
+                                    }
 
-                                // Add a spacer between rows
-                                if (index < setDataList.lastIndex) {
-                                    Spacer(modifier = Modifier.height(40.dp))
+                                    // Add a spacer between rows
+                                    if (index < setDataList.lastIndex) {
+                                        Spacer(modifier = Modifier.height(40.dp))
+                                    }
                                 }
                             }
                         }
@@ -79,6 +103,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
 
 
     }
@@ -116,11 +141,9 @@ class MainActivity : ComponentActivity() {
                                             setlogo = rememberAsyncImagePainter(setData.images.symbol),
                                             setNameLabel = setData.name,
                                             onButtonTapped = {
-                                                Toast.makeText(
-                                                    applicationContext,
-                                                    "Hello World!",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
+                                                val intent = Intent(applicationContext, CardsActivity::class.java)
+                                                intent.putExtra("set_id", setData.id)
+                                                cardsActivityResultLauncher.launch(intent)
                                             }
                                         )
 

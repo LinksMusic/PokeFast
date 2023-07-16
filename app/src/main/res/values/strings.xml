@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PokeFastApp</string>
+    <string name="title_activity_cards">CardsActivity</string>
+    <string name="title_activity_card_information">CardInformationActivity</string>
 </resources>

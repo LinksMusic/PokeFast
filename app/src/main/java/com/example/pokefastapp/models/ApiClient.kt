@@ -33,9 +33,15 @@ class ApiClient {
                     }
                 }
                 "getCard" -> {
-                    val url = URL("https://api.pokemontcg.io/v2/cards/$message")
+                    val url = URL("https://api.pokemontcg.io/v2/cards$message")
                     sendRequest(url) { json ->
                         parseCardJson(json)
+                    }
+                }
+                "getCardsOfSet" ->{
+                    val url = URL("https://api.pokemontcg.io/v2/cards$message")
+                    sendRequest(url) { json ->
+                        parseCardsOfSetJson(json)
                     }
                 }
                 else -> throw IllegalArgumentException("Invalid data type: $type")
@@ -65,8 +71,13 @@ class ApiClient {
         return gson.fromJson(json, PokemonMultipleSets::class.java)
     }
 
-    fun parseCardJson(json: String): PokemonCard {
+    fun parseCardJson(json: String): SingleCard {
         val gson = Gson()
-        return gson.fromJson(json, PokemonCard::class.java)
+        return gson.fromJson(json, SingleCard::class.java)
+    }
+
+    fun parseCardsOfSetJson(json: String): PokemonMultipleCards {
+        val gson = Gson()
+        return gson.fromJson(json, PokemonMultipleCards::class.java)
     }
 }
