@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "X4LE5eWSf8Nq3VIkuath8N",
     "node": "1:18",
-    "version": "3823438490",
+    "version": "3827480140",
     "component-id": "f2879cadf543cda8c4f76b01027ce6ae2dc8ea2e"
   },
   "default": "Set Button ListView",
@@ -18,20 +18,24 @@
         "root": "true"
       },
       {
-        "type": "vector",
-        "id": "Button"
-      },
-      {
         "type": "image",
         "id": "Setname"
       },
       {
-        "type": "vector",
-        "id": "Rectangle 19"
-      },
-      {
         "type": "image",
         "id": "Setlogo"
+      },
+      {
+        "type": "text",
+        "id": "Name"
+      },
+      {
+        "type": "vector",
+        "id": "Button"
+      },
+      {
+        "type": "group",
+        "id": "top_level_synth"
       }
     ],
     "modes": {
@@ -52,37 +56,23 @@
               "spread": "0.0",
               "blend-mode": "normal"
             },
+            "tap-handler": "$onButtonTapped",
             "is-structured": "false",
             "children": [
-              "Button",
               "Setname",
-              "Rectangle 19",
-              "Setlogo"
+              "Setlogo",
+              "Name",
+              "Button",
+              "top_level_synth"
             ],
             "clip-content": "false"
-          },
-          {
-            "id": "Button",
-            "border-radius": "100.0",
-            "tap-handler": "$Setbuttonclick",
-            "size-constraints": {
-              "width-constraints": {
-                "sizing-mode": "proportional",
-                "value": "1.0"
-              },
-              "height-constraints": {
-                "sizing-mode": "proportional",
-                "value": "1.0"
-              }
-            },
-            "vector-content": "button.svg"
           },
           {
             "id": "Setname",
             "alignment": {
               "horizontal": {
                 "attachment": "start",
-                "offset": "59.0"
+                "offset": "11.0"
               },
               "vertical": {
                 "attachment": "start",
@@ -92,40 +82,26 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "187.0"
+                "value": "279.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "35.0"
+                "value": "54.0"
               }
             },
-            "image-content": "$Setname",
+            "image-content": "$SetName",
             "scale": "cover"
-          },
-          {
-            "id": "Rectangle 19",
-            "size-constraints": {
-              "width-constraints": {
-                "sizing-mode": "fixed",
-                "value": "46.0"
-              },
-              "height-constraints": {
-                "sizing-mode": "fixed",
-                "value": "44.0"
-              }
-            },
-            "vector-content": "rectangle_19.svg"
           },
           {
             "id": "Setlogo",
             "alignment": {
               "horizontal": {
                 "attachment": "start",
-                "offset": "7.0"
+                "offset": "64.0"
               },
               "vertical": {
                 "attachment": "start",
-                "offset": "6.0"
+                "offset": "67.0"
               }
             },
             "size-constraints": {
@@ -138,25 +114,82 @@
                 "value": "32.0"
               }
             },
-            "image-content": "$Setlogo",
+            "image-content": "$SetLogo",
             "scale": "cover"
+          },
+          {
+            "id": "Name",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "134.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "77.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Name",
+            "overflow": "visible",
+            "text-align-vertical": "center",
+            "text-size": "11.0",
+            "line-height": "1.2102272727272727",
+            "typeface": "Inter"
+          },
+          {
+            "id": "Button",
+            "border-radius": "20.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "300.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "65.0"
+              }
+            },
+            "vector-content": "button.svg"
+          },
+          {
+            "id": "top_level_synth",
+            "opacity": "100.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink",
+                "min": "300.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "item-spacing": "34.0",
+            "clip-content": "false"
           }
         ]
       }
     }
   },
   "parameters": {
-    "Setbuttonclick": {
+    "onButtonTapped": {
       "data-type": "void-callback",
       "required": false,
-      "description": "When clicked open the Set to the card screen"
+      "description": ""
     },
-    "Setname": {
+    "SetName": {
       "data-type": "image",
       "required": false,
       "description": "image of name of the set"
     },
-    "Setlogo": {
+    "SetLogo": {
       "data-type": "image",
       "required": false,
       "description": "Logo of the set"
@@ -166,12 +199,12 @@
     {
       "design": "Set Button ListView",
       "size": {
-        "width": 263.0,
-        "height": 44.0
+        "width": 300.0,
+        "height": 109.0
       },
       "parameters": {
-        "Setname": "setname.png",
-        "Setlogo": "setlogo.png"
+        "SetName": "setname.png",
+        "SetLogo": "setlogo.png"
       }
     }
   ],
